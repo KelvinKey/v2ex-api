@@ -15,7 +15,11 @@ const $v2ex = new V2exApi();
 ### 获取最热主题
 
 ```node
-response = $v2ex.getHotTopics();
+response = $v2ex.getHotTopics().then(res => {
+  //....
+}).catch(err => {
+  //....
+});
 ```
 
 示例：
@@ -72,7 +76,11 @@ response = $v2ex.getHotTopics();
 ### 获取最新主题
 
 ```node
-response = $v2ex.getLatestTopics();
+response = $v2ex.getLatestTopics().then(res => {
+  //....
+}).catch(err => {
+  //....
+});
 ```
 
 示例：
@@ -95,7 +103,7 @@ response = $v2ex.getNode("python");
     "url":"https://www.v2ex.com/go/nodejs",
     "topics":1831,
     "footer":"",
-    "header":"Node.js is a platform built on <a href="http://code.google.com/p/v8/" target="_blank">Chrome's JavaScript runtime</a> for easily building fast, scalable network applications.",
+    "header":"Node.js is a platform built on <a href='http://code.google.com/p/v8/' target='_blank'>Chrome's JavaScript runtime</a> for easily building fast, scalable network applications.",
     "title_alternative":"Node.js",
     "avatar_mini":"//cdn.v2ex.com/navatar/2421/fcb1/436_mini.png?m=1551072244",
     "stars":2235,
@@ -110,13 +118,21 @@ response = $v2ex.getNode("python");
 根据用户名获取用户信息
 
 ```node
-response = $v2ex.getMemberByUsername('kelvinkeyss');
+response = $v2ex.getMemberByUsername('kelvinkeyss').then(res => {
+  //....
+}).catch(err => {
+  //....
+});
 ```
 
 根据用户 ID 获取用户信息
 
 ```node
-response = $v2ex.getMemberByID(429521);
+response = $v2ex.getMemberByID(429521).then(res => {
+  //....
+}).catch(err => {
+  //....
+});
 ```
 
 示例：
@@ -146,17 +162,21 @@ response = $v2ex.getMemberByID(429521);
 方法最后一个参数为是否格式化结果，`bool` 类型 ：
 
 ```node
-$response = $v2ex.getMemberByUsername('kelvinkeyss', false);
+response = $v2ex.getMemberByUsername('kelvinkeyss', false).then(res => {
+  //....
+}).catch(err => {
+  //....
+});
 ```
 
 ### 参数说明
 
 ```node
-array|string getHotTopics(bool $format = true)
-array|string getLatestTopics(bool $format = true)
-array|string getNode(string name, bool $format = true)
-array|string getMemberByUsername(string username, bool $format = true)
-array|string getMemberByID(int id, bool $format = true)
+array|string getHotTopics(bool $format = true).then(res => {}).catch(err => {});
+array|string getLatestTopics(bool $format = true).then(res => {}).catch(err => {});
+array|string getNode(string name, bool $format = true).then(res => {}).catch(err => {});
+array|string getMemberByUsername(string username, bool $format = true).then(res => {}).catch(err => {});
+array|string getMemberByID(int id, bool $format = true).then(res => {}).catch(err => {});
 ```
 > - name - 节点名称，比如：“nodejs”；
 > - username - 用户名称，比如：“kelvinkeyss”；

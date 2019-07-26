@@ -12,7 +12,6 @@ class V2exApi {
     * V2exApi constructor.
     */
     constructor() {
-        this.apiDomain = "https://www.v2ex.com/api/";
     }
 
     /**
@@ -25,22 +24,27 @@ class V2exApi {
     * @throws HttpException
     */
     request(api, params = {}, $format = true) {
-        //格式化请求地址
-        let apiUrl = util.format(api, this.apiDomain, Object.keys(params).length > 0 ? querystring.stringify(params) : '');
 
-        https.get(apiUrl, res => {
-            const buffer = [];
-            res.on('data', data => {
-                buffer.push(data);
-            });
-            res.on('end', err => {
-                let data = Buffer.concat(buffer).toString('utf-8');
-                let result = $format ? JSON.parse(data) : data;
-                console.log(result)
-            });
+        return new Promise(resolve => {
+            //格式化请求地址
+            let apiDomain = "https://www.v2ex.com/api/";
+            
+            let apiUrl = util.format(api, apiDomain, Object.keys(params).length > 0 ? querystring.stringify(params) : '');
 
-        }).on('error', err => {
-            console.log(err);
+            let response = https.get(apiUrl, res => {
+                const buffer = [];
+                res.on('data', data => {
+                    buffer.push(data);
+                });
+                res.on('end', err => {
+                    let data = Buffer.concat(buffer).toString('utf-8');
+                    let result = $format ? JSON.parse(data) : data;
+                    resolve(result);
+                });
+
+            }).on('error', err => {
+                result(err)
+            });
         });
     }
 
@@ -108,3 +112,6 @@ class V2exApi {
         return this.request('%smembers/show.json?%s', { 'id': id }, $format);
     }
 }
+
+//暴露接口
+module.exports = V2exApi;
