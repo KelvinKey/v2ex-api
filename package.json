@@ -1,0 +1,28 @@
+{
+  "name": "v2ex-api-master",
+  "version": "1.0.0",
+  "description": "基于 V2EX API 的 node 组件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KelvinKey/v2ex-api.git"
+  },
+  "author": [
+    {
+      "name": "kelvinkey",
+      "email": "kelvinkeyss@yahoo.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KelvinKey/v2ex-api/issues"
+  },
+  "homepage": "https://github.com/KelvinKey/v2ex-api#readme",
+  "dependencies": {
+    "querystring": "^0.2.0",
+    "util": "^0.12.1"
+  }
+}
