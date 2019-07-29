@@ -14,7 +14,7 @@ class V2exApi {
     constructor() {
     }
 
-    /**
+    /**方案一 
     * @param string api
     * @param array  params
     * @param bool   $format
@@ -25,28 +25,60 @@ class V2exApi {
     */
     request(api, params = {}, $format = true) {
 
-        return new Promise(resolve => {
-            //格式化请求地址
-            let apiDomain = "https://www.v2ex.com/api/";
-            
-            let apiUrl = util.format(api, apiDomain, Object.keys(params).length > 0 ? querystring.stringify(params) : '');
+        let apiDomain = "https://www.v2ex.com/api/";
 
-            let response = https.get(apiUrl, res => {
-                const buffer = [];
-                res.on('data', data => {
-                    buffer.push(data);
-                });
-                res.on('end', err => {
-                    let data = Buffer.concat(buffer).toString('utf-8');
-                    let result = $format ? JSON.parse(data) : data;
-                    resolve(result);
-                });
-
-            }).on('error', err => {
-                result(err)
+        let apiUrl = util.format(api, apiDomain, Object.keys(params).length > 0 ? querystring.stringify(params) : '');
+        const result = "";
+        https.get(apiUrl, res => {
+            const buffer = [];
+            res.on('data', data => {
+                buffer.push(data);
             });
+            res.on('end', err => {
+                let data = Buffer.concat(buffer).toString('utf-8');
+                result = $format ? JSON.parse(data) : data;
+            });
+
+        }).on('error', err => {
+            console.log(err);
         });
+
+        return result;
     }
+
+    /**方案二  异步  
+        * @param string api
+        * @param array  params
+        * @param bool   $format
+        *
+        * @return mixed|string
+        *
+        * @throws HttpException
+        */
+    // request(api, params = {}, $format = true) {
+
+    //     return new Promise(resolve => {
+    //         //格式化请求地址
+    //         let apiDomain = "https://www.v2ex.com/api/";
+
+    //         let apiUrl = util.format(api, apiDomain, Object.keys(params).length > 0 ? querystring.stringify(params) : '');
+    //         const result = "";
+    //         https.get(apiUrl, res => {
+    //             const buffer = [];
+    //             res.on('data', data => {
+    //                 buffer.push(data);
+    //             });
+    //             res.on('end', err => {
+    //                 let data = Buffer.concat(buffer).toString('utf-8');
+    //                 result = $format ? JSON.parse(data) : data;
+    //                 resolve(result);
+    //             });
+
+    //         }).on('error', err => {
+    //             resolve(err);
+    //         });
+    //     });
+    // }
 
     /**
      * 获取最热主题.

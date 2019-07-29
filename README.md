@@ -15,11 +15,22 @@ const $v2ex = new V2exApi();
 ### 获取最热主题
 
 ```node
+方案一：
+response = $v2ex.getHotTopics();
+
+方案二 异步方法：
 response = $v2ex.getHotTopics().then(res => {
   //....
 }).catch(err => {
   //....
 });
+
+或者
+async function test () {
+    response = await $v2ex.getHotTopics();
+}
+
+test();
 ```
 
 示例：
@@ -76,11 +87,22 @@ response = $v2ex.getHotTopics().then(res => {
 ### 获取最新主题
 
 ```node
+方案一：
+response = $v2ex.getLatestTopics();
+
+方案二 异步方法：
 response = $v2ex.getLatestTopics().then(res => {
   //....
 }).catch(err => {
   //....
 });
+
+或者
+async function test () {
+    response = await $v2ex.getLatestTopics();
+}
+
+test();
 ```
 
 示例：
@@ -89,7 +111,22 @@ response = $v2ex.getLatestTopics().then(res => {
 ### 获取节点信息
 
 ```node
-response = $v2ex.getNode("python");
+方案一：
+response = $v2ex.getNode("Nodejs");
+
+方案二 异步方法：
+response = $v2ex.getNode("Nodejs").then(res => {
+  //....
+}).catch(err => {
+  //....
+});
+
+或者
+async function test () {
+    response = await $v2ex.getNode("Nodejs");
+}
+
+test();
 ```
 
 示例：
@@ -118,21 +155,43 @@ response = $v2ex.getNode("python");
 根据用户名获取用户信息
 
 ```node
+方案一：
+response = $v2ex.getMemberByUsername('kelvinkeyss');
+
+方案二 异步方法：
 response = $v2ex.getMemberByUsername('kelvinkeyss').then(res => {
   //....
 }).catch(err => {
   //....
 });
+
+或者
+async function test () {
+    response = await $v2ex.getMemberByUsername('kelvinkeyss');
+}
+
+test();
 ```
 
 根据用户 ID 获取用户信息
 
 ```node
+方案一：
+response = $v2ex.getMemberByID(429521);
+
+方案二 异步方法：
 response = $v2ex.getMemberByID(429521).then(res => {
   //....
 }).catch(err => {
   //....
 });
+
+或者
+async function test () {
+    response = await $v2ex.getMemberByID(429521);
+}
+
+test();
 ```
 
 示例：
@@ -162,21 +221,45 @@ response = $v2ex.getMemberByID(429521).then(res => {
 方法最后一个参数为是否格式化结果，`bool` 类型 ：
 
 ```node
+方案一：
+response = $v2ex.getMemberByUsername('kelvinkeyss', false);
+
+方案二  异步方法：
 response = $v2ex.getMemberByUsername('kelvinkeyss', false).then(res => {
   //....
 }).catch(err => {
   //....
 });
-```
+
+或者
+async function test () {
+    response = await $v2ex.getMemberByUsername('kelvinkeyss', false);
+}
+
+test();
 
 ### 参数说明
 
 ```node
+方案一：
+array|string getHotTopics(bool $format = true)
+array|string getLatestTopics(bool $format = true)
+array|string getNode(string $name, bool $format = true)
+array|string getMemberByUsername(string $username, bool $format = true)
+array|string getMemberByID(int $id, bool $format = true)
+方案二：
 array|string getHotTopics(bool $format = true).then(res => {}).catch(err => {});
 array|string getLatestTopics(bool $format = true).then(res => {}).catch(err => {});
 array|string getNode(string name, bool $format = true).then(res => {}).catch(err => {});
 array|string getMemberByUsername(string username, bool $format = true).then(res => {}).catch(err => {});
 array|string getMemberByID(int id, bool $format = true).then(res => {}).catch(err => {});
+
+或者
+array|string
+async function test () {
+    response = await $v2ex.getMemberByID(int id, bool $format = true);
+}
+test();
 ```
 > - name - 节点名称，比如：“nodejs”；
 > - username - 用户名称，比如：“kelvinkeyss”；
